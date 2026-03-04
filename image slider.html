@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Image Slider</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+    margin:0;
+    font-family:Arial, sans-serif;
+    background:#eaeaea;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
+
+/* Title */
+h1{
+    margin-bottom:20px;
+    color:#333;
+}
+
+/* Slider */
+.slider{
+    position:relative;
+    width:700px;
+    height:400px;
+    overflow:hidden;
+    border-radius:10px;
+    box-shadow:0 8px 20px rgba(0,0,0,0.3);
+}
+
+/* Slides */
+.slides{
+    display:flex;
+    transition:transform 0.5s ease-in-out;
+}
+
+.slides img{
+    width:700px;
+    height:400px;
+    object-fit:cover;
+}
+
+/* Buttons */
+button{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    background:rgba(0,0,0,0.6);
+    color:white;
+    border:none;
+    padding:12px 20px;
+    font-size:16px;
+    cursor:pointer;
+    border-radius:5px;
+}
+
+.prev{
+    left:10px;
+}
+
+.next{
+    right:10px;
+}
+
+button:hover{
+    background:black;
+}
+</style>
+</head>
+
+<body>
+
+<h1>Image Slider</h1>
+
+<div class="slider">
+    <div class="slides">
+        <img src="https://picsum.photos/id/1015/700/400">
+        <img src="https://picsum.photos/id/1016/700/400">
+        <img src="https://picsum.photos/id/1018/700/400">
+    </div>
+
+    <button class="prev">Previous</button>
+    <button class="next">Next</button>
+</div>
+
+<script>
+const slides = document.querySelector(".slides");
+const images = document.querySelectorAll(".slides img");
+const prev = document.querySelector(".prev");
+const next = document.querySelector(".next");
+
+let index = 0;
+const total = images.length;
+const width = 700;
+
+function showSlide(i){
+    if(i >= total){
+        index = 0;
+    } 
+    else if(i < 0){
+        index = total - 1;
+    } 
+    else{
+        index = i;
+    }
+
+    slides.style.transform = "translateX(" + (-index * width) + "px)";
+}
+
+next.addEventListener("click", function(){
+    showSlide(index + 1);
+});
+
+prev.addEventListener("click", function(){
+    showSlide(index - 1);
+});
+</script>
+
+</body>
+</html>
